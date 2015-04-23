@@ -1,0 +1,31 @@
+name: CustomLeveling
+main: io.github.mac_genius.customleveling.CustomLeveling
+version: 1.0
+permissions:
+    cl.*:
+        description: Gives access to all commands for the plugin
+        children:
+            cl.reload: true
+            cl.help: true
+    cl.reload:
+        description: Allows a player to reload the config
+        default: op
+    cl.help:
+            description: Brings up the commands
+            default: op
+commands:
+    cl:
+        description: This is the help command.
+        usage: /cl
+        permission: cl.help
+        permission-message: You do not have permission to do that.
+    cl reload:
+            description: This will reload the plugin.
+            usage: /cl reload
+            permission: cl.reload
+            permission-message: You do not have permission to do that.
+    cl reload:
+            description: This will show the commands.
+            usage: /cl help
+            permission: cl.help
+            permission-message: You do not have permission to do that.
