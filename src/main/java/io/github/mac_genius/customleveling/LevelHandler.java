@@ -10,18 +10,35 @@ import org.bukkit.plugin.Plugin;
 import java.util.ArrayList;
 
 /**
- * Created by Mac on 4/17/2015.
+ * This class implements the listener. It checks for when a player
+ * gains xp.
+ *
+ * @author John Harrison
  */
 public class LevelHandler implements Listener {
     private Plugin plugin;
 
+    /**
+     * Gets the main instance of the plugin.
+     *
+     * @param pluginIn is the main instance of the plugin.
+     */
     public LevelHandler(Plugin pluginIn) {
         plugin = pluginIn;
     }
 
+    /**
+     * Checks to see if a player gets xp.
+     *
+     * @param event is the PlayerExpChange event
+     */
     @EventHandler
-    public void onKill(PlayerExpChangeEvent event) {
+    public void onXpGain(PlayerExpChangeEvent event) {
+
+        // Takes in the levels defined in the plugin
         ArrayList<String> levelList = new ArrayList<>(plugin.getConfig().getStringList("levels"));
+
+        // If there are levels defined in the config
         if (!levelList.get(0).equals("none")) {
             Player player = event.getPlayer();
             for (String s : levelList) {
@@ -36,6 +53,8 @@ public class LevelHandler implements Listener {
                     return;
                 }
             }
+
+            // If the player reaches the highest level.
             player.sendMessage(ChatColor.GREEN + "[Custom Leveling]" + ChatColor.WHITE + " You have reached the highest level!");
             event.setAmount(0);
         }
